@@ -1,0 +1,1142 @@
+<!DOCTYPE html>
+<html lang="ja">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Google Workspace 完全マスター講座</title>
+<style>
+  :root {
+    --primary: #4285f4;
+    --primary-dark: #1a73e8;
+    --accent: #0f9d58;
+    --accent-light: #e6f4ea;
+    --bg: #f8f9fa;
+    --bg-white: #ffffff;
+    --text: #202124;
+    --text-muted: #5f6368;
+    --border: #dadce0;
+    --code-bg: #f1f3f4;
+    --warning: #e37400;
+    --warning-bg: #fef7e0;
+    --danger: #d93025;
+    --danger-bg: #fce8e6;
+    --info: #1a73e8;
+    --info-bg: #e8f0fe;
+    --purple: #a142f4;
+    --purple-bg: #f3e8fd;
+    --google-blue: #4285f4;
+    --google-red: #ea4335;
+    --google-yellow: #fbbc04;
+    --google-green: #34a853;
+    --chapter1: #4285f4;
+    --chapter2: #ea4335;
+    --chapter3: #34a853;
+    --chapter4: #fbbc04;
+    --chapter5: #a142f4;
+  }
+  * { margin: 0; padding: 0; box-sizing: border-box; }
+  body {
+    font-family: 'Google Sans', -apple-system, BlinkMacSystemFont, 'Segoe UI', 'Noto Sans JP', Helvetica, Arial, sans-serif;
+    color: var(--text);
+    line-height: 1.7;
+    background: var(--bg);
+  }
+
+  /* ===== Hero ===== */
+  .hero {
+    background: linear-gradient(135deg, #1a237e 0%, #4285f4 40%, #34a853 70%, #fbbc04 100%);
+    color: white;
+    padding: 60px 20px 80px;
+    text-align: center;
+    position: relative;
+  }
+  .hero h1 { font-size: 2.8em; margin-bottom: 16px; letter-spacing: -0.02em; }
+  .hero p { font-size: 1.2em; opacity: 0.9; max-width: 600px; margin: 0 auto; }
+  .hero-badge {
+    display: inline-block;
+    background: rgba(255,255,255,0.15);
+    padding: 6px 16px;
+    border-radius: 20px;
+    font-size: 0.9em;
+    margin-bottom: 20px;
+    backdrop-filter: blur(4px);
+  }
+
+  /* ===== TOC ===== */
+  .toc { max-width: 900px; margin: -40px auto 40px; padding: 0 20px; position: relative; z-index: 10; }
+  .toc-inner { background: white; border-radius: 16px; box-shadow: 0 4px 24px rgba(0,0,0,0.1); padding: 32px; }
+  .toc h2 { font-size: 1.3em; margin-bottom: 20px; display: flex; align-items: center; gap: 8px; }
+  .toc-grid { display: grid; grid-template-columns: repeat(auto-fit, minmax(250px, 1fr)); gap: 12px; }
+  .toc-item {
+    display: flex; align-items: center; gap: 12px; padding: 14px 16px; border-radius: 10px;
+    text-decoration: none; color: var(--text); transition: all 0.2s; border: 1px solid var(--border);
+  }
+  .toc-item:hover { transform: translateY(-2px); box-shadow: 0 4px 12px rgba(0,0,0,0.08); }
+  .toc-num {
+    width: 36px; height: 36px; border-radius: 10px; display: flex; align-items: center;
+    justify-content: center; font-weight: 700; font-size: 0.95em; color: white; flex-shrink: 0;
+  }
+  .toc-item:nth-child(1) .toc-num { background: var(--chapter1); }
+  .toc-item:nth-child(2) .toc-num { background: var(--chapter2); }
+  .toc-item:nth-child(3) .toc-num { background: var(--chapter3); }
+  .toc-item:nth-child(4) .toc-num { background: #e37400; }
+  .toc-item:nth-child(5) .toc-num { background: var(--chapter5); }
+  .toc-text { font-weight: 600; font-size: 0.95em; }
+  .toc-sub { font-size: 0.8em; color: var(--text-muted); }
+
+  /* ===== Container ===== */
+  .container { max-width: 900px; margin: 0 auto; padding: 0 20px 80px; }
+
+  /* ===== Chapter ===== */
+  .chapter { margin-bottom: 60px; scroll-margin-top: 20px; }
+  .chapter-header { padding: 24px 28px; border-radius: 16px 16px 0 0; color: white; }
+  .ch1 .chapter-header { background: linear-gradient(135deg, #1a73e8, #8ab4f8); }
+  .ch2 .chapter-header { background: linear-gradient(135deg, #d93025, #f28b82); }
+  .ch3 .chapter-header { background: linear-gradient(135deg, #0f9d58, #81c995); }
+  .ch4 .chapter-header { background: linear-gradient(135deg, #e37400, #fdd663); color: #202124; }
+  .ch5 .chapter-header { background: linear-gradient(135deg, #7627bb, #d7aefb); }
+  .chapter-header h2 { font-size: 1.8em; margin-bottom: 4px; }
+  .chapter-header p { opacity: 0.9; font-size: 0.95em; }
+  .chapter-body { background: white; border-radius: 0 0 16px 16px; padding: 32px 28px; border: 1px solid var(--border); border-top: none; }
+
+  /* ===== Section ===== */
+  .section { margin-bottom: 36px; }
+  .section:last-child { margin-bottom: 0; }
+  .section h3 { font-size: 1.35em; margin-bottom: 12px; padding-bottom: 8px; border-bottom: 2px solid var(--bg); }
+  .section h4 { font-size: 1.1em; margin: 20px 0 8px; color: var(--primary-dark); }
+  .section p { margin-bottom: 12px; }
+
+  /* ===== Diagram ===== */
+  .diagram { background: var(--bg); border: 1px solid var(--border); border-radius: 12px; padding: 24px; margin: 20px 0; text-align: center; overflow-x: auto; }
+  .diagram-title { font-weight: 700; font-size: 0.9em; color: var(--text-muted); margin-bottom: 16px; text-transform: uppercase; letter-spacing: 0.05em; }
+  .diagram svg { max-width: 100%; height: auto; }
+
+  /* ===== Flow ===== */
+  .flow { display: flex; align-items: center; justify-content: center; gap: 0; flex-wrap: wrap; padding: 10px 0; }
+  .flow-item { padding: 12px 20px; border-radius: 10px; font-weight: 600; font-size: 0.9em; white-space: nowrap; }
+  .flow-arrow { font-size: 1.5em; color: var(--text-muted); margin: 0 4px; flex-shrink: 0; }
+  .flow-blue { background: var(--info-bg); color: var(--info); border: 1px solid #b6d9fe; }
+  .flow-green { background: var(--accent-light); color: var(--accent); border: 1px solid #aceebb; }
+  .flow-purple { background: var(--purple-bg); color: var(--purple); border: 1px solid #e0c6ff; }
+  .flow-yellow { background: var(--warning-bg); color: var(--warning); border: 1px solid #ebd07e; }
+  .flow-red { background: var(--danger-bg); color: var(--danger); border: 1px solid #ffcecb; }
+
+  /* ===== Code ===== */
+  pre { background: #24292f; color: #e6edf3; padding: 20px; border-radius: 10px; overflow-x: auto; margin: 16px 0; font-size: 0.9em; line-height: 1.6; }
+  pre .comment { color: #8b949e; }
+  pre .cmd { color: #79c0ff; }
+  pre .flag { color: #d2a8ff; }
+  pre .string { color: #a5d6ff; }
+  pre .output { color: #7ee787; }
+  pre .prompt { color: #f0883e; user-select: none; }
+  pre .key { color: #ffa657; }
+  pre .func { color: #d2a8ff; }
+  code { font-family: 'SF Mono', 'Fira Code', Consolas, monospace; font-size: 0.92em; }
+  :not(pre) > code { background: var(--code-bg); padding: 2px 7px; border-radius: 6px; border: 1px solid var(--border); color: var(--danger); font-size: 0.88em; }
+
+  /* ===== Callout ===== */
+  .callout { padding: 16px 20px; border-radius: 10px; margin: 16px 0; border-left: 4px solid; font-size: 0.95em; }
+  .callout-title { font-weight: 700; margin-bottom: 4px; display: flex; align-items: center; gap: 6px; }
+  .callout-info { background: var(--info-bg); border-color: var(--info); }
+  .callout-warning { background: var(--warning-bg); border-color: var(--warning); }
+  .callout-danger { background: var(--danger-bg); border-color: var(--danger); }
+  .callout-success { background: var(--accent-light); border-color: var(--accent); }
+  .callout-purple { background: var(--purple-bg); border-color: var(--purple); }
+
+  /* ===== Table ===== */
+  .compare-table { width: 100%; border-collapse: collapse; margin: 16px 0; font-size: 0.92em; }
+  .compare-table th, .compare-table td { padding: 12px 16px; text-align: left; border-bottom: 1px solid var(--border); }
+  .compare-table th { background: var(--bg); font-weight: 700; font-size: 0.85em; text-transform: uppercase; letter-spacing: 0.04em; color: var(--text-muted); }
+  .compare-table tr:hover td { background: #f8f9fb; }
+
+  /* ===== Steps ===== */
+  .steps { counter-reset: step; }
+  .step { display: flex; gap: 16px; margin-bottom: 20px; align-items: flex-start; }
+  .step-num { width: 36px; height: 36px; border-radius: 50%; background: var(--primary); color: white; display: flex; align-items: center; justify-content: center; font-weight: 700; font-size: 0.9em; flex-shrink: 0; margin-top: 2px; }
+  .step-content { flex: 1; }
+  .step-content h4 { margin: 0 0 6px; color: var(--text); font-size: 1em; }
+
+  /* ===== Keyword ===== */
+  .keyword { display: inline-block; background: var(--info-bg); color: var(--info); padding: 2px 10px; border-radius: 6px; font-size: 0.85em; font-weight: 600; margin: 2px; }
+  .keyword-green { background: var(--accent-light); color: var(--accent); }
+  .keyword-purple { background: var(--purple-bg); color: var(--purple); }
+  .keyword-red { background: var(--danger-bg); color: var(--danger); }
+  .keyword-yellow { background: var(--warning-bg); color: var(--warning); }
+
+  /* ===== Two Col ===== */
+  .two-col { display: grid; grid-template-columns: 1fr 1fr; gap: 20px; margin: 16px 0; }
+  @media (max-width: 600px) { .two-col { grid-template-columns: 1fr; } .hero h1 { font-size: 2em; } }
+  .col-card { background: var(--bg); border: 1px solid var(--border); border-radius: 10px; padding: 20px; }
+  .col-card h4 { margin: 0 0 8px; color: var(--text); }
+
+  /* ===== Three Col ===== */
+  .three-col { display: grid; grid-template-columns: repeat(3, 1fr); gap: 14px; margin: 16px 0; }
+  @media (max-width: 700px) { .three-col { grid-template-columns: 1fr; } }
+
+  /* ===== App Card ===== */
+  .app-card { background: white; border: 1px solid var(--border); border-radius: 12px; padding: 18px; text-align: center; transition: all 0.2s; }
+  .app-card:hover { transform: translateY(-2px); box-shadow: 0 4px 12px rgba(0,0,0,0.08); }
+  .app-icon { font-size: 2em; margin-bottom: 8px; }
+  .app-card h4 { font-size: 0.95em; margin-bottom: 4px; }
+  .app-card p { font-size: 0.8em; color: var(--text-muted); margin: 0; }
+
+  /* ===== Demo Box ===== */
+  .demo-box { background: white; border-radius: 12px; overflow: hidden; margin: 16px 0; border: 1px solid var(--border); }
+  .demo-bar { background: var(--bg); padding: 8px 16px; display: flex; align-items: center; gap: 8px; border-bottom: 1px solid var(--border); }
+  .demo-dot { width: 12px; height: 12px; border-radius: 50%; }
+  .demo-dot.red { background: #ff5f57; }
+  .demo-dot.yellow { background: #febc2e; }
+  .demo-dot.green { background: #28c840; }
+  .demo-title { color: var(--text-muted); font-size: 0.85em; margin-left: 8px; }
+  .demo-content { padding: 20px; font-size: 0.92em; line-height: 1.8; }
+
+  /* ===== UI Mock ===== */
+  .ui-mock { background: white; border: 1px solid var(--border); border-radius: 12px; overflow: hidden; margin: 16px 0; }
+  .ui-bar { background: #f1f3f4; padding: 10px 16px; display: flex; align-items: center; gap: 12px; border-bottom: 1px solid var(--border); }
+  .ui-search { flex: 1; background: white; border: 1px solid var(--border); border-radius: 8px; padding: 6px 14px; font-size: 0.85em; color: var(--text-muted); }
+  .ui-avatar { width: 28px; height: 28px; border-radius: 50%; background: var(--google-blue); display: flex; align-items: center; justify-content: center; color: white; font-size: 0.7em; font-weight: 700; }
+  .ui-body { padding: 20px; }
+
+  /* ===== Timeline ===== */
+  .timeline { position: relative; padding-left: 40px; margin: 20px 0; }
+  .timeline::before { content: ''; position: absolute; left: 15px; top: 0; bottom: 0; width: 3px; background: var(--border); border-radius: 2px; }
+  .timeline-item { position: relative; margin-bottom: 24px; }
+  .timeline-item::before { content: ''; position: absolute; left: -29px; top: 6px; width: 12px; height: 12px; border-radius: 50%; background: var(--primary); border: 3px solid white; box-shadow: 0 0 0 2px var(--primary); }
+  .timeline-item h4 { margin: 0 0 4px; font-size: 1em; }
+  .timeline-item p { margin: 0; font-size: 0.92em; color: var(--text-muted); }
+
+  /* ===== Accordion ===== */
+  details { margin: 12px 0; border: 1px solid var(--border); border-radius: 10px; overflow: hidden; }
+  details summary { padding: 14px 20px; background: var(--bg); cursor: pointer; font-weight: 600; font-size: 0.95em; user-select: none; }
+  details summary:hover { background: #eef1f5; }
+  details[open] summary { border-bottom: 1px solid var(--border); }
+  details .detail-body { padding: 20px; }
+
+  /* ===== Shortcut Key ===== */
+  kbd { display: inline-block; background: #f1f3f4; border: 1px solid #dadce0; border-radius: 4px; padding: 2px 8px; font-family: inherit; font-size: 0.85em; box-shadow: 0 1px 0 #dadce0; }
+
+  /* ===== Footer ===== */
+  .footer { text-align: center; padding: 40px 20px; color: var(--text-muted); font-size: 0.9em; border-top: 1px solid var(--border); max-width: 900px; margin: 0 auto; }
+  html { scroll-behavior: smooth; }
+</style>
+</head>
+<body>
+
+<!-- ===== HERO ===== -->
+<div class="hero">
+  <div class="hero-badge">初心者から業務効率化まで</div>
+  <h1>Google Workspace<br>完全マスター講座</h1>
+  <p>全5章でGmail・Drive・カレンダー・Meetをゼロから学び、Apps ScriptやAI連携まで完全に使いこなせる実践ガイド</p>
+</div>
+
+<!-- ===== 目次 ===== -->
+<div class="toc">
+  <div class="toc-inner">
+    <h2>&#128218; カリキュラム</h2>
+    <div class="toc-grid">
+      <a href="#ch1" class="toc-item">
+        <div class="toc-num">1</div>
+        <div><div class="toc-text">Google Workspaceの全体像</div><div class="toc-sub">アプリ一覧と基本設定</div></div>
+      </a>
+      <a href="#ch2" class="toc-item">
+        <div class="toc-num">2</div>
+        <div><div class="toc-text">Gmail 完全活用</div><div class="toc-sub">ラベル・フィルタ・検索術</div></div>
+      </a>
+      <a href="#ch3" class="toc-item">
+        <div class="toc-num">3</div>
+        <div><div class="toc-text">Drive & ドキュメント系</div><div class="toc-sub">共有・共同編集・スプレッドシート</div></div>
+      </a>
+      <a href="#ch4" class="toc-item">
+        <div class="toc-num">4</div>
+        <div><div class="toc-text">Calendar & Meet</div><div class="toc-sub">スケジュール管理とビデオ会議</div></div>
+      </a>
+      <a href="#ch5" class="toc-item">
+        <div class="toc-num">5</div>
+        <div><div class="toc-text">自動化 & AI連携</div><div class="toc-sub">Apps Script / Gemini / 外部連携</div></div>
+      </a>
+    </div>
+  </div>
+</div>
+
+<div class="container">
+
+<!-- ============================================================ -->
+<!-- CHAPTER 1 -->
+<!-- ============================================================ -->
+<div class="chapter ch1" id="ch1">
+  <div class="chapter-header">
+    <h2>第1章 Google Workspaceの全体像</h2>
+    <p>まずは全体を把握しよう</p>
+  </div>
+  <div class="chapter-body">
+
+    <div class="section">
+      <h3>1.1 Google Workspaceとは？</h3>
+      <p>Google Workspace（旧 G Suite）は、Googleが提供する<strong>ビジネス向けクラウドツールのセット</strong>です。メール、ファイル保存、ドキュメント作成、ビデオ会議など、仕事に必要なツールがすべて揃っています。</p>
+      <p>すべてのデータは<strong>クラウド（Googleのサーバー）に保存</strong>されるので、どのデバイスからでもアクセスでき、自動保存されるのでデータを失う心配がありません。</p>
+
+      <div class="callout callout-info">
+        <div class="callout-title">&#128161; クラウドとは？</div>
+        自分のPCではなく、インターネット上のサーバーにデータを保存する仕組みです。スマホでもPCでも同じデータにアクセスでき、PCが壊れてもデータは安全です。
+      </div>
+    </div>
+
+    <div class="section">
+      <h3>1.2 アプリ一覧マップ</h3>
+      <p>Google Workspaceに含まれる主要アプリを把握しましょう。</p>
+
+      <div class="diagram">
+        <div class="diagram-title">Google Workspace アプリ全体像</div>
+        <svg viewBox="0 0 720 380" style="max-width: 720px;">
+          <!-- Center -->
+          <circle cx="360" cy="190" r="50" fill="#4285f4" opacity="0.1" stroke="#4285f4" stroke-width="2"/>
+          <text x="360" y="185" text-anchor="middle" font-size="12" font-weight="700" fill="#4285f4">Google</text>
+          <text x="360" y="200" text-anchor="middle" font-size="12" font-weight="700" fill="#4285f4">Workspace</text>
+
+          <!-- Gmail -->
+          <rect x="50" y="30" width="130" height="60" rx="12" fill="#ea4335" opacity="0.1" stroke="#ea4335" stroke-width="2"/>
+          <text x="115" y="57" text-anchor="middle" font-size="20">&#9993;&#65039;</text>
+          <text x="115" y="78" text-anchor="middle" font-size="11" font-weight="700" fill="#ea4335">Gmail</text>
+          <line x1="180" y1="70" x2="315" y2="170" stroke="#ea4335" stroke-width="1.5" opacity="0.4"/>
+
+          <!-- Drive -->
+          <rect x="540" y="30" width="130" height="60" rx="12" fill="#34a853" opacity="0.1" stroke="#34a853" stroke-width="2"/>
+          <text x="605" y="57" text-anchor="middle" font-size="20">&#128193;</text>
+          <text x="605" y="78" text-anchor="middle" font-size="11" font-weight="700" fill="#34a853">Google Drive</text>
+          <line x1="540" y1="70" x2="405" y2="170" stroke="#34a853" stroke-width="1.5" opacity="0.4"/>
+
+          <!-- Docs -->
+          <rect x="30" y="160" width="120" height="60" rx="12" fill="#4285f4" opacity="0.1" stroke="#4285f4" stroke-width="2"/>
+          <text x="90" y="187" text-anchor="middle" font-size="20">&#128196;</text>
+          <text x="90" y="208" text-anchor="middle" font-size="11" font-weight="700" fill="#4285f4">ドキュメント</text>
+          <line x1="150" y1="190" x2="310" y2="190" stroke="#4285f4" stroke-width="1.5" opacity="0.4"/>
+
+          <!-- Sheets -->
+          <rect x="570" y="160" width="120" height="60" rx="12" fill="#0f9d58" opacity="0.1" stroke="#0f9d58" stroke-width="2"/>
+          <text x="630" y="187" text-anchor="middle" font-size="20">&#128202;</text>
+          <text x="630" y="208" text-anchor="middle" font-size="11" font-weight="700" fill="#0f9d58">スプレッドシート</text>
+          <line x1="570" y1="190" x2="410" y2="190" stroke="#0f9d58" stroke-width="1.5" opacity="0.4"/>
+
+          <!-- Calendar -->
+          <rect x="50" y="290" width="130" height="60" rx="12" fill="#fbbc04" opacity="0.1" stroke="#e37400" stroke-width="2"/>
+          <text x="115" y="317" text-anchor="middle" font-size="20">&#128197;</text>
+          <text x="115" y="338" text-anchor="middle" font-size="11" font-weight="700" fill="#e37400">カレンダー</text>
+          <line x1="180" y1="310" x2="315" y2="210" stroke="#e37400" stroke-width="1.5" opacity="0.4"/>
+
+          <!-- Meet -->
+          <rect x="540" y="290" width="130" height="60" rx="12" fill="#00897b" opacity="0.1" stroke="#00897b" stroke-width="2"/>
+          <text x="605" y="317" text-anchor="middle" font-size="20">&#127909;</text>
+          <text x="605" y="338" text-anchor="middle" font-size="11" font-weight="700" fill="#00897b">Google Meet</text>
+          <line x1="540" y1="310" x2="405" y2="210" stroke="#00897b" stroke-width="1.5" opacity="0.4"/>
+
+          <!-- Slides -->
+          <rect x="220" y="310" width="110" height="55" rx="10" fill="#fbbc04" opacity="0.1" stroke="#fbbc04" stroke-width="1.5"/>
+          <text x="275" y="335" text-anchor="middle" font-size="16">&#127912;</text>
+          <text x="275" y="353" text-anchor="middle" font-size="10" font-weight="600" fill="#e37400">スライド</text>
+          <line x1="275" y1="310" x2="340" y2="240" stroke="#fbbc04" stroke-width="1" opacity="0.3"/>
+
+          <!-- Forms -->
+          <rect x="390" y="310" width="110" height="55" rx="10" fill="#7627bb" opacity="0.1" stroke="#7627bb" stroke-width="1.5"/>
+          <text x="445" y="335" text-anchor="middle" font-size="16">&#128203;</text>
+          <text x="445" y="353" text-anchor="middle" font-size="10" font-weight="600" fill="#7627bb">フォーム</text>
+          <line x1="445" y1="310" x2="380" y2="240" stroke="#7627bb" stroke-width="1" opacity="0.3"/>
+
+          <!-- Chat -->
+          <rect x="260" y="10" width="100" height="50" rx="10" fill="#00897b" opacity="0.1" stroke="#00897b" stroke-width="1.5"/>
+          <text x="310" y="33" text-anchor="middle" font-size="14">&#128172;</text>
+          <text x="310" y="49" text-anchor="middle" font-size="10" font-weight="600" fill="#00897b">Chat</text>
+          <line x1="330" y1="60" x2="350" y2="140" stroke="#00897b" stroke-width="1" opacity="0.3"/>
+
+          <!-- Admin -->
+          <rect x="380" y="10" width="100" height="50" rx="10" fill="#5f6368" opacity="0.1" stroke="#5f6368" stroke-width="1.5"/>
+          <text x="430" y="33" text-anchor="middle" font-size="14">&#9881;&#65039;</text>
+          <text x="430" y="49" text-anchor="middle" font-size="10" font-weight="600" fill="#5f6368">管理コンソール</text>
+          <line x1="410" y1="60" x2="380" y2="140" stroke="#5f6368" stroke-width="1" opacity="0.3"/>
+        </svg>
+      </div>
+    </div>
+
+    <div class="section">
+      <h3>1.3 無料Googleアカウント vs Workspace（有料）</h3>
+      <table class="compare-table">
+        <thead>
+          <tr><th></th><th>無料 Googleアカウント</th><th>Google Workspace（有料）</th></tr>
+        </thead>
+        <tbody>
+          <tr><td><strong>メールアドレス</strong></td><td>xxx@gmail.com</td><td>xxx@自社ドメイン.com</td></tr>
+          <tr><td><strong>ストレージ</strong></td><td>15GB</td><td>30GB〜5TB（プランによる）</td></tr>
+          <tr><td><strong>管理機能</strong></td><td>なし</td><td>管理コンソールで一括管理</td></tr>
+          <tr><td><strong>Meet録画</strong></td><td>不可</td><td>可能</td></tr>
+          <tr><td><strong>共有ドライブ</strong></td><td>なし</td><td>あり（チーム共有フォルダ）</td></tr>
+          <tr><td><strong>サポート</strong></td><td>コミュニティのみ</td><td>24時間サポート</td></tr>
+          <tr><td><strong>料金</strong></td><td>無料</td><td>月額 ¥680〜（1ユーザー）</td></tr>
+        </tbody>
+      </table>
+      <div class="callout callout-success">
+        <div class="callout-title">&#9989; 個人利用なら？</div>
+        個人や小規模チームなら無料アカウントで十分です。会社として使う場合や独自ドメインのメールが必要な場合はWorkspaceを検討しましょう。
+      </div>
+    </div>
+
+    <div class="section">
+      <h3>1.4 セキュリティ設定（最初にやるべきこと）</h3>
+      <div class="steps">
+        <div class="step">
+          <div class="step-num">1</div>
+          <div class="step-content">
+            <h4>2段階認証を有効にする</h4>
+            <p><strong>Googleアカウント → セキュリティ → 2段階認証プロセス</strong> から設定。パスワードが漏れても、スマホの確認なしではログインできなくなります。</p>
+          </div>
+        </div>
+        <div class="step">
+          <div class="step-num">2</div>
+          <div class="step-content">
+            <h4>復旧用メール・電話番号を設定</h4>
+            <p>パスワードを忘れた時の復旧手段。<strong>アカウント → 個人情報 → 連絡先情報</strong>で設定。</p>
+          </div>
+        </div>
+        <div class="step">
+          <div class="step-num">3</div>
+          <div class="step-content">
+            <h4>セキュリティ診断を実行</h4>
+            <p><strong>myaccount.google.com/security-checkup</strong> にアクセス。不審なログインやアプリ権限をチェック。</p>
+          </div>
+        </div>
+      </div>
+      <div class="callout callout-danger">
+        <div class="callout-title">&#9888;&#65039; 2段階認証は必須！</div>
+        Googleアカウントにはメール、ファイル、カレンダーなど全ての重要データが入っています。2段階認証なしは「家の鍵をかけずに外出する」のと同じです。
+      </div>
+    </div>
+  </div>
+</div>
+
+<!-- ============================================================ -->
+<!-- CHAPTER 2 -->
+<!-- ============================================================ -->
+<div class="chapter ch2" id="ch2">
+  <div class="chapter-header">
+    <h2>第2章 Gmail 完全活用</h2>
+    <p>メールを制するものが業務を制する</p>
+  </div>
+  <div class="chapter-body">
+
+    <div class="section">
+      <h3>2.1 Gmailの基本画面</h3>
+      <div class="ui-mock">
+        <div class="ui-bar">
+          <span style="font-size: 1.2em;">&#9776;</span>
+          <span style="color: var(--google-red); font-weight: 700; font-size: 1.1em;">Gmail</span>
+          <div class="ui-search">&#128269; メールを検索</div>
+          <div class="ui-avatar">K</div>
+        </div>
+        <div class="ui-body" style="display: flex; gap: 20px; font-size: 0.85em;">
+          <div style="width: 140px; border-right: 1px solid var(--border); padding-right: 16px;">
+            <div style="background: var(--google-blue); color: white; padding: 8px 16px; border-radius: 16px; text-align: center; margin-bottom: 12px; font-weight: 600;">+ 作成</div>
+            <div style="line-height: 2.2;">
+              <div style="font-weight: 700; color: var(--google-red);">&#128229; 受信トレイ <span style="background: var(--danger-bg); padding: 1px 6px; border-radius: 10px; font-size: 0.8em;">3</span></div>
+              <div style="color: var(--text-muted);">&#11088; スター付き</div>
+              <div style="color: var(--text-muted);">&#128337; スヌーズ中</div>
+              <div style="color: var(--text-muted);">&#128228; 送信済み</div>
+              <div style="color: var(--text-muted);">&#128204; 下書き</div>
+            </div>
+            <div style="margin-top: 12px; padding-top: 12px; border-top: 1px solid var(--border);">
+              <div style="font-weight: 600; font-size: 0.9em;">ラベル</div>
+              <div style="color: var(--google-blue);">&#128309; 仕事</div>
+              <div style="color: var(--google-green);">&#128994; プライベート</div>
+              <div style="color: var(--warning);">&#128992; 要対応</div>
+            </div>
+          </div>
+          <div style="flex: 1;">
+            <div style="padding: 10px 0; border-bottom: 1px solid var(--border); font-weight: 700;">&#9744; 田中太郎 &nbsp; <span style="font-weight: 400;">プロジェクトの進捗報告</span> <span style="color: var(--text-muted); font-weight: 400;">- 本日の進捗をご報告...</span></div>
+            <div style="padding: 10px 0; border-bottom: 1px solid var(--border); background: #f2f6fc;">&#9744; 佐藤花子 &nbsp; <span style="font-weight: 400;">会議のアジェンダ共有</span> <span style="color: var(--text-muted); font-weight: 400;">- 明日の会議について...</span></div>
+            <div style="padding: 10px 0; border-bottom: 1px solid var(--border);">&#9744; Google &nbsp; <span style="font-weight: 400;">セキュリティ通知</span> <span style="color: var(--text-muted); font-weight: 400;">- 新しいデバイスから...</span></div>
+          </div>
+        </div>
+      </div>
+    </div>
+
+    <div class="section">
+      <h3>2.2 ラベルとフィルタで自動整理</h3>
+      <p>Gmailにはフォルダがありません。代わりに<strong>「ラベル」</strong>を使います。1つのメールに複数のラベルを付けられるのがフォルダとの違いです。</p>
+
+      <div class="two-col">
+        <div class="col-card">
+          <h4 style="color: var(--danger);">&#10060; フォルダ方式（他のメールソフト）</h4>
+          <p style="font-size: 0.9em;">1つのメールは1つのフォルダにしか入れられない。「仕事」と「重要」の両方に入れたい時に困る。</p>
+        </div>
+        <div class="col-card">
+          <h4 style="color: var(--accent);">&#9989; ラベル方式（Gmail）</h4>
+          <p style="font-size: 0.9em;">1つのメールに「仕事」「重要」「プロジェクトA」など<strong>複数のラベル</strong>を付けられる。</p>
+        </div>
+      </div>
+
+      <h4>フィルタの設定方法</h4>
+      <p>条件に合うメールに<strong>自動でラベルを付けたり、アーカイブしたり</strong>できます。</p>
+      <div class="steps">
+        <div class="step">
+          <div class="step-num">1</div>
+          <div class="step-content">
+            <h4>検索バーの右端にある「&#9660;（検索オプション）」をクリック</h4>
+          </div>
+        </div>
+        <div class="step">
+          <div class="step-num">2</div>
+          <div class="step-content">
+            <h4>条件を入力（From、件名、キーワードなど）</h4>
+          </div>
+        </div>
+        <div class="step">
+          <div class="step-num">3</div>
+          <div class="step-content">
+            <h4>「フィルタを作成」をクリック → アクションを選択</h4>
+            <p>例：「ラベルを付ける: 仕事」「受信トレイをスキップ（アーカイブする）」「スターを付ける」など</p>
+          </div>
+        </div>
+      </div>
+
+      <div class="callout callout-success">
+        <div class="callout-title">&#9989; おすすめフィルタ例</div>
+        <table class="compare-table" style="margin-top: 8px;">
+          <tr><td>ニュースレター・メルマガ</td><td>ラベル「メルマガ」＋ 受信トレイスキップ</td></tr>
+          <tr><td>上司からのメール</td><td>ラベル「重要」＋ スター付き</td></tr>
+          <tr><td>特定プロジェクトの通知</td><td>件名に「[ProjectA]」→ ラベル「ProjectA」</td></tr>
+        </table>
+      </div>
+    </div>
+
+    <div class="section">
+      <h3>2.3 Gmail検索演算子（超強力）</h3>
+      <p>Gmailの検索バーは<strong>特別なキーワード（演算子）</strong>を使うと、ピンポイントでメールを探せます。</p>
+
+      <table class="compare-table">
+        <thead>
+          <tr><th>演算子</th><th>意味</th><th>使用例</th></tr>
+        </thead>
+        <tbody>
+          <tr><td><code>from:</code></td><td>送信者で検索</td><td><code>from:tanaka@example.com</code></td></tr>
+          <tr><td><code>to:</code></td><td>受信者で検索</td><td><code>to:team@example.com</code></td></tr>
+          <tr><td><code>subject:</code></td><td>件名で検索</td><td><code>subject:請求書</code></td></tr>
+          <tr><td><code>has:attachment</code></td><td>添付ファイル付き</td><td><code>from:boss has:attachment</code></td></tr>
+          <tr><td><code>filename:</code></td><td>添付ファイル名で検索</td><td><code>filename:pdf</code> <code>filename:見積書</code></td></tr>
+          <tr><td><code>before:</code> / <code>after:</code></td><td>日付で絞り込み</td><td><code>after:2026/01/01 before:2026/03/31</code></td></tr>
+          <tr><td><code>is:unread</code></td><td>未読メール</td><td><code>is:unread from:tanaka</code></td></tr>
+          <tr><td><code>is:starred</code></td><td>スター付きメール</td><td><code>is:starred has:attachment</code></td></tr>
+          <tr><td><code>label:</code></td><td>ラベルで検索</td><td><code>label:仕事 is:unread</code></td></tr>
+          <tr><td><code>larger:</code> / <code>smaller:</code></td><td>サイズで絞り込み</td><td><code>larger:10M</code>（10MB以上）</td></tr>
+          <tr><td><code>"  "</code></td><td>完全一致検索</td><td><code>"プロジェクト会議"</code></td></tr>
+          <tr><td><code>OR</code></td><td>いずれかに一致</td><td><code>from:tanaka OR from:sato</code></td></tr>
+          <tr><td><code>-</code></td><td>除外</td><td><code>-from:newsletter</code></td></tr>
+        </tbody>
+      </table>
+
+      <div class="callout callout-purple">
+        <div class="callout-title">&#128161; 組み合わせ例</div>
+        <p><code>from:tanaka has:attachment after:2026/01/01 filename:pdf</code></p>
+        <p>&#8594; 「田中さんから2026年以降に届いた、PDFが添付されているメール」を検索</p>
+      </div>
+    </div>
+
+    <div class="section">
+      <h3>2.4 便利な設定と機能</h3>
+
+      <details>
+        <summary>&#9997;&#65039; 署名の設定</summary>
+        <div class="detail-body">
+          <p><strong>設定（&#9881;&#65039;）→ すべての設定を表示 → 全般 → 署名</strong></p>
+          <p>新規作成と返信で別の署名を使い分けることもできます。HTML形式で画像やリンクも挿入可能。</p>
+        </div>
+      </details>
+
+      <details>
+        <summary>&#128228; 送信取り消し</summary>
+        <div class="detail-body">
+          <p><strong>設定 → 全般 → 送信取り消し</strong> で5〜30秒の猶予時間を設定。送信直後に「取り消し」ボタンが表示されます。<strong>30秒に設定するのがおすすめ</strong>。</p>
+        </div>
+      </details>
+
+      <details>
+        <summary>&#128231; エイリアス（+記法）</summary>
+        <div class="detail-body">
+          <p>メールアドレスの<code>@</code>の前に<code>+任意の文字</code>を追加しても同じアドレスに届きます。</p>
+          <p>例: <code>koike+shopping@gmail.com</code> → <code>koike@gmail.com</code> に届く</p>
+          <p><strong>活用法</strong>：サービスごとに別のエイリアスで登録すると、フィルタで自動整理できます。</p>
+        </div>
+      </details>
+
+      <details>
+        <summary>&#128338; スヌーズ機能</summary>
+        <div class="detail-body">
+          <p>「今は対応できないけど忘れたくない」メールを、指定した日時に受信トレイの先頭に再表示させます。メール上で右クリック → スヌーズ。</p>
+        </div>
+      </details>
+
+      <details>
+        <summary>&#128197; 送信日時の指定</summary>
+        <div class="detail-body">
+          <p>送信ボタンの横にある「&#9660;」→「送信日時を設定」で、未来の日時にメールを予約送信できます。深夜に書いたメールを翌朝に送りたい時に便利。</p>
+        </div>
+      </details>
+    </div>
+
+    <div class="section">
+      <h3>2.5 Gmailショートカットキー</h3>
+      <div class="callout callout-warning">
+        <div class="callout-title">&#9888;&#65039; 事前設定が必要</div>
+        <strong>設定 → 全般 → キーボードショートカット → ON</strong> にしてから使えます。
+      </div>
+      <table class="compare-table">
+        <thead><tr><th>ショートカット</th><th>動作</th></tr></thead>
+        <tbody>
+          <tr><td><kbd>c</kbd></td><td>新規メール作成</td></tr>
+          <tr><td><kbd>r</kbd></td><td>返信</td></tr>
+          <tr><td><kbd>a</kbd></td><td>全員に返信</td></tr>
+          <tr><td><kbd>f</kbd></td><td>転送</td></tr>
+          <tr><td><kbd>e</kbd></td><td>アーカイブ</td></tr>
+          <tr><td><kbd>#</kbd></td><td>ゴミ箱に移動</td></tr>
+          <tr><td><kbd>s</kbd></td><td>スターを付ける/外す</td></tr>
+          <tr><td><kbd>l</kbd></td><td>ラベルを付ける</td></tr>
+          <tr><td><kbd>/</kbd></td><td>検索バーにフォーカス</td></tr>
+          <tr><td><kbd>j</kbd> / <kbd>k</kbd></td><td>次/前のメールに移動</td></tr>
+          <tr><td><kbd>Cmd</kbd>+<kbd>Enter</kbd></td><td>メールを送信</td></tr>
+          <tr><td><kbd>?</kbd></td><td>ショートカット一覧を表示</td></tr>
+        </tbody>
+      </table>
+    </div>
+  </div>
+</div>
+
+<!-- ============================================================ -->
+<!-- CHAPTER 3 -->
+<!-- ============================================================ -->
+<div class="chapter ch3" id="ch3">
+  <div class="chapter-header">
+    <h2>第3章 Google Drive & ドキュメント系アプリ</h2>
+    <p>ファイル管理と共同編集をマスターする</p>
+  </div>
+  <div class="chapter-body">
+
+    <div class="section">
+      <h3>3.1 Google Driveの構造</h3>
+      <div class="diagram">
+        <div class="diagram-title">Driveの構造</div>
+        <svg viewBox="0 0 700 220" style="max-width: 700px;">
+          <rect x="20" y="10" width="200" height="80" rx="12" fill="#e8f0fe" stroke="#4285f4" stroke-width="2"/>
+          <text x="120" y="42" text-anchor="middle" font-size="13" font-weight="700" fill="#4285f4">&#128193; マイドライブ</text>
+          <text x="120" y="62" text-anchor="middle" font-size="10" fill="#5f6368">自分専用のストレージ</text>
+          <text x="120" y="78" text-anchor="middle" font-size="10" fill="#5f6368">自分だけがオーナー</text>
+
+          <rect x="250" y="10" width="200" height="80" rx="12" fill="#e6f4ea" stroke="#34a853" stroke-width="2"/>
+          <text x="350" y="42" text-anchor="middle" font-size="13" font-weight="700" fill="#34a853">&#128101; 共有ドライブ</text>
+          <text x="350" y="62" text-anchor="middle" font-size="10" fill="#5f6368">チームで共有するストレージ</text>
+          <text x="350" y="78" text-anchor="middle" font-size="10" fill="#5f6368">メンバー全員がアクセス可</text>
+
+          <rect x="480" y="10" width="200" height="80" rx="12" fill="#fef7e0" stroke="#e37400" stroke-width="2"/>
+          <text x="580" y="42" text-anchor="middle" font-size="13" font-weight="700" fill="#e37400">&#128279; 共有アイテム</text>
+          <text x="580" y="62" text-anchor="middle" font-size="10" fill="#5f6368">他の人から共有された</text>
+          <text x="580" y="78" text-anchor="middle" font-size="10" fill="#5f6368">ファイルやフォルダ</text>
+
+          <rect x="100" y="130" width="500" height="70" rx="12" fill="#f1f3f4" stroke="#dadce0" stroke-width="1.5"/>
+          <text x="350" y="160" text-anchor="middle" font-size="12" font-weight="700" fill="#5f6368">&#128270; 検索・最近使用したファイル・スター付き・ゴミ箱</text>
+          <text x="350" y="180" text-anchor="middle" font-size="10" fill="#5f6368">全ドライブ横断で検索・管理可能</text>
+        </svg>
+      </div>
+    </div>
+
+    <div class="section">
+      <h3>3.2 共有設定（超重要）</h3>
+      <p>Google Driveの共有は<strong>3段階の権限</strong>と<strong>2つの共有方法</strong>の組み合わせです。</p>
+
+      <table class="compare-table">
+        <thead><tr><th>権限レベル</th><th>できること</th><th>適する場面</th></tr></thead>
+        <tbody>
+          <tr><td><span class="keyword">閲覧者</span></td><td>見るだけ。編集・コメント不可</td><td>資料の配布</td></tr>
+          <tr><td><span class="keyword-yellow" style="display:inline-block;padding:2px 10px;border-radius:6px;font-size:0.85em;font-weight:600;">閲覧者（コメント可）</span></td><td>見る＋コメントできる。編集は不可</td><td>フィードバック収集</td></tr>
+          <tr><td><span class="keyword-green">編集者</span></td><td>何でもできる（編集・共有設定の変更も）</td><td>共同編集メンバー</td></tr>
+        </tbody>
+      </table>
+
+      <div class="two-col">
+        <div class="col-card">
+          <h4>&#128100; ユーザー指定で共有</h4>
+          <p style="font-size: 0.9em;">メールアドレスを入力して特定の人に共有。最も安全な方法。</p>
+        </div>
+        <div class="col-card">
+          <h4>&#128279; リンク共有</h4>
+          <p style="font-size: 0.9em;">URLを知っている人なら誰でもアクセス可能。手軽だが、リンクが漏れると誰でも見られるので注意。</p>
+        </div>
+      </div>
+
+      <div class="callout callout-danger">
+        <div class="callout-title">&#9888;&#65039; リンク共有の危険性</div>
+        「リンクを知っている全員が編集可」にすると、URLが流出した時にデータが書き換えられる可能性があります。<strong>社外への共有は「閲覧者」権限で</strong>が原則です。
+      </div>
+    </div>
+
+    <div class="section">
+      <h3>3.3 Googleドキュメント</h3>
+      <p>Word相当のオンライン文書作成ツール。<strong>リアルタイム共同編集</strong>が最大の特徴です。</p>
+
+      <h4>3つの編集モード</h4>
+      <div class="three-col">
+        <div class="app-card">
+          <div class="app-icon" style="color: var(--google-blue);">&#9997;&#65039;</div>
+          <h4>編集モード</h4>
+          <p>直接テキストを変更。通常の編集。</p>
+        </div>
+        <div class="app-card">
+          <div class="app-icon" style="color: var(--google-green);">&#128172;</div>
+          <h4>提案モード</h4>
+          <p>変更が「提案」として記録され、オーナーが承認/却下できる。レビューに最適。</p>
+        </div>
+        <div class="app-card">
+          <div class="app-icon" style="color: var(--text-muted);">&#128065;&#65039;</div>
+          <h4>閲覧モード</h4>
+          <p>読むだけ。誤操作を防ぎたい時に。</p>
+        </div>
+      </div>
+
+      <div class="callout callout-info">
+        <div class="callout-title">&#128161; コメント機能を使いこなす</div>
+        <ul style="padding-left: 20px;">
+          <li>テキストを選択 → <kbd>Cmd</kbd>+<kbd>Option</kbd>+<kbd>M</kbd> でコメント追加</li>
+          <li><code>@名前</code> でメンバーをメンション → メール通知が届く</li>
+          <li>コメントに「解決」ボタンで完了マーク</li>
+        </ul>
+      </div>
+    </div>
+
+    <div class="section">
+      <h3>3.4 Googleスプレッドシート</h3>
+      <p>Excel相当のオンライン表計算。よく使う関数とテクニックを押さえましょう。</p>
+
+      <h4>必須関数トップ10</h4>
+      <table class="compare-table">
+        <thead><tr><th>関数</th><th>意味</th><th>使用例</th></tr></thead>
+        <tbody>
+          <tr><td><code>=SUM()</code></td><td>合計</td><td><code>=SUM(B2:B10)</code></td></tr>
+          <tr><td><code>=AVERAGE()</code></td><td>平均</td><td><code>=AVERAGE(B2:B10)</code></td></tr>
+          <tr><td><code>=COUNT()</code></td><td>数値の個数</td><td><code>=COUNT(A:A)</code></td></tr>
+          <tr><td><code>=COUNTA()</code></td><td>空でないセルの個数</td><td><code>=COUNTA(A:A)</code></td></tr>
+          <tr><td><code>=IF()</code></td><td>条件分岐</td><td><code>=IF(B2>=80,"合格","不合格")</code></td></tr>
+          <tr><td><code>=VLOOKUP()</code></td><td>表からデータを検索</td><td><code>=VLOOKUP(A2,商品表!A:C,3,FALSE)</code></td></tr>
+          <tr><td><code>=XLOOKUP()</code></td><td>VLOOKUPの進化版</td><td><code>=XLOOKUP(A2,商品表!A:A,商品表!C:C)</code></td></tr>
+          <tr><td><code>=CONCATENATE()</code></td><td>文字列結合</td><td><code>=A2&" "&B2</code> でもOK</td></tr>
+          <tr><td><code>=UNIQUE()</code></td><td>重複を除いたリスト</td><td><code>=UNIQUE(A2:A100)</code></td></tr>
+          <tr><td><code>=ARRAYFORMULA()</code></td><td>配列数式（一括適用）</td><td><code>=ARRAYFORMULA(B2:B*C2:C)</code></td></tr>
+        </tbody>
+      </table>
+
+      <div class="callout callout-purple">
+        <div class="callout-title">&#128161; VLOOKUP vs XLOOKUP</div>
+        <p><strong>VLOOKUP</strong> は左端列しか検索できず、列番号を数字で指定する必要があります。<strong>XLOOKUP</strong> はどの列でも検索でき、列追加にも強い。新しく書くなら <strong>XLOOKUP がおすすめ</strong>です。</p>
+      </div>
+
+      <h4>スプレッドシートの便利機能</h4>
+      <details>
+        <summary>&#127912; 条件付き書式</summary>
+        <div class="detail-body">
+          <p>セルの値に応じて自動で色を変える機能。<strong>表示形式 → 条件付き書式</strong>で設定。</p>
+          <p>例：売上が目標以上なら緑、未達なら赤に自動着色</p>
+        </div>
+      </details>
+      <details>
+        <summary>&#128202; ピボットテーブル</summary>
+        <div class="detail-body">
+          <p>大量のデータを集計・分析する機能。<strong>挿入 → ピボットテーブル</strong>で作成。</p>
+          <p>例：売上データから「月別×商品別の売上合計」を自動計算</p>
+        </div>
+      </details>
+      <details>
+        <summary>&#128202; データの入力規則</summary>
+        <div class="detail-body">
+          <p>セルに入力できる値を制限。<strong>データ → データの入力規則</strong>。プルダウンリストの作成にも使います。</p>
+        </div>
+      </details>
+    </div>
+
+    <div class="section">
+      <h3>3.5 Googleスライド & フォーム</h3>
+      <div class="two-col">
+        <div class="col-card">
+          <h4>&#127912; Googleスライド</h4>
+          <ul style="padding-left: 16px; font-size: 0.9em; line-height: 2;">
+            <li>PowerPoint相当のプレゼンツール</li>
+            <li>テンプレートギャラリーから選んで作成</li>
+            <li>スピーカーノート（発表者メモ）付き</li>
+            <li>共同編集でチームで同時に作業可能</li>
+            <li>Google Meetで直接プレゼン可能</li>
+          </ul>
+        </div>
+        <div class="col-card">
+          <h4>&#128203; Googleフォーム</h4>
+          <ul style="padding-left: 16px; font-size: 0.9em; line-height: 2;">
+            <li>アンケート・申込フォームを簡単作成</li>
+            <li>回答は自動でスプレッドシートに集計</li>
+            <li>条件分岐（回答に応じて次の質問を変える）</li>
+            <li>テスト・クイズモード（自動採点）</li>
+            <li>URL共有またはメールで配布</li>
+          </ul>
+        </div>
+      </div>
+    </div>
+  </div>
+</div>
+
+<!-- ============================================================ -->
+<!-- CHAPTER 4 -->
+<!-- ============================================================ -->
+<div class="chapter ch4" id="ch4">
+  <div class="chapter-header">
+    <h2>第4章 Google Calendar & Meet</h2>
+    <p>スケジュール管理とビデオ会議</p>
+  </div>
+  <div class="chapter-body">
+
+    <div class="section">
+      <h3>4.1 Google Calendarの基本</h3>
+      <div class="ui-mock">
+        <div class="ui-bar">
+          <span style="font-size: 1.2em;">&#9776;</span>
+          <span style="font-weight: 700; font-size: 1.1em;">&#128197; Google Calendar</span>
+          <span style="color: var(--text-muted); font-size: 0.9em;">2026年4月</span>
+          <div style="flex:1;"></div>
+          <span style="background: var(--google-blue); color: white; padding: 4px 12px; border-radius: 6px; font-size: 0.85em;">+ 作成</span>
+        </div>
+        <div class="ui-body" style="font-size: 0.82em;">
+          <div style="display: grid; grid-template-columns: 60px repeat(5,1fr); gap: 1px; background: var(--border);">
+            <div style="background: var(--bg); padding: 6px; text-align: center; font-weight: 600;"></div>
+            <div style="background: var(--bg); padding: 6px; text-align: center; font-weight: 600;">月</div>
+            <div style="background: var(--bg); padding: 6px; text-align: center; font-weight: 600;">火</div>
+            <div style="background: var(--bg); padding: 6px; text-align: center; font-weight: 600;">水</div>
+            <div style="background: var(--bg); padding: 6px; text-align: center; font-weight: 600;">木</div>
+            <div style="background: var(--bg); padding: 6px; text-align: center; font-weight: 600;">金</div>
+            <div style="background: white; padding: 4px; text-align: right; color: var(--text-muted);">10:00</div>
+            <div style="background: white; padding: 4px;"><span style="background: #e8f0fe; color: #1a73e8; padding: 2px 6px; border-radius: 4px; font-size: 0.9em;">&#128187; 定例MTG</span></div>
+            <div style="background: white; padding: 4px;"></div>
+            <div style="background: white; padding: 4px;"><span style="background: #fce8e6; color: #d93025; padding: 2px 6px; border-radius: 4px; font-size: 0.9em;">&#128680; 締切</span></div>
+            <div style="background: white; padding: 4px;"></div>
+            <div style="background: white; padding: 4px;"></div>
+            <div style="background: white; padding: 4px; text-align: right; color: var(--text-muted);">13:00</div>
+            <div style="background: white; padding: 4px;"></div>
+            <div style="background: white; padding: 4px;"><span style="background: #e6f4ea; color: #0f9d58; padding: 2px 6px; border-radius: 4px; font-size: 0.9em;">&#127909; 1on1</span></div>
+            <div style="background: white; padding: 4px;"></div>
+            <div style="background: white; padding: 4px;"><span style="background: #e8f0fe; color: #1a73e8; padding: 2px 6px; border-radius: 4px; font-size: 0.9em;">&#128187; 定例MTG</span></div>
+            <div style="background: white; padding: 4px;"></div>
+          </div>
+        </div>
+      </div>
+    </div>
+
+    <div class="section">
+      <h3>4.2 予定の作成テクニック</h3>
+      <table class="compare-table">
+        <thead><tr><th>機能</th><th>設定方法</th><th>使いどころ</th></tr></thead>
+        <tbody>
+          <tr><td><strong>繰り返し予定</strong></td><td>「繰り返さない」→「毎週」「毎月」など</td><td>定例会議、1on1</td></tr>
+          <tr><td><strong>通知設定</strong></td><td>「通知を追加」→ 10分前、1日前など</td><td>重要な予定を忘れない</td></tr>
+          <tr><td><strong>ゲスト招待</strong></td><td>「ゲストを追加」でメールアドレス入力</td><td>会議の参加者に自動通知</td></tr>
+          <tr><td><strong>Meet自動追加</strong></td><td>「Google Meetのビデオ会議を追加」</td><td>オンライン会議の設定が一瞬</td></tr>
+          <tr><td><strong>会議室予約</strong></td><td>「会議室を追加」（Workspace利用時）</td><td>オフィスの会議室管理</td></tr>
+          <tr><td><strong>添付ファイル</strong></td><td>予定にDriveのファイルを添付</td><td>アジェンダや資料の共有</td></tr>
+          <tr><td><strong>色分け</strong></td><td>予定を右クリック → 色を選択</td><td>カテゴリ別に視覚的に管理</td></tr>
+        </tbody>
+      </table>
+
+      <div class="callout callout-info">
+        <div class="callout-title">&#128161; 他のカレンダーの追加</div>
+        <ul style="padding-left: 20px;">
+          <li><strong>祝日</strong>：他のカレンダー → 「+」→ 関心のあるカレンダー → 日本の祝日</li>
+          <li><strong>同僚の予定</strong>：他のカレンダー → 「+」→ ユーザーを検索 → メールアドレス入力</li>
+          <li><strong>外部カレンダー</strong>：URLで購読（iCal形式）→ 外部の予定表を統合</li>
+        </ul>
+      </div>
+    </div>
+
+    <div class="section">
+      <h3>4.3 Google Meet 完全ガイド</h3>
+
+      <h4>会議の始め方</h4>
+      <div class="diagram">
+        <div class="diagram-title">3つの方法で会議を始められる</div>
+        <div class="three-col">
+          <div class="app-card">
+            <div class="app-icon">&#128197;</div>
+            <h4>カレンダーから</h4>
+            <p>予定にMeetリンクを追加 → 時間になったら「参加」ボタン</p>
+          </div>
+          <div class="app-card">
+            <div class="app-icon">&#127909;</div>
+            <h4>Meet直接</h4>
+            <p>meet.google.com → 「新しい会議を作成」</p>
+          </div>
+          <div class="app-card">
+            <div class="app-icon">&#9993;&#65039;</div>
+            <h4>Gmailから</h4>
+            <p>サイドバーのMeetアイコン → 「会議を新規作成」</p>
+          </div>
+        </div>
+      </div>
+
+      <h4>Meet の便利機能</h4>
+      <table class="compare-table">
+        <thead><tr><th>機能</th><th>説明</th><th>使い方</th></tr></thead>
+        <tbody>
+          <tr><td><strong>画面共有</strong></td><td>自分の画面やウィンドウを参加者に見せる</td><td>下部バーの「&#8593;」ボタン → タブ/ウィンドウ/全画面を選択</td></tr>
+          <tr><td><strong>録画</strong></td><td>会議を録画してDriveに保存（Workspace有料プラン）</td><td>「&#8942;」→「ミーティングを録画」</td></tr>
+          <tr><td><strong>字幕</strong></td><td>リアルタイムで字幕を表示</td><td>「CC」ボタン → 日本語を選択</td></tr>
+          <tr><td><strong>挙手</strong></td><td>発言したい時に手を挙げるリアクション</td><td>「&#9995;」ボタン</td></tr>
+          <tr><td><strong>ブレイクアウトルーム</strong></td><td>参加者を小グループに分ける</td><td>「&#8942;」→「ブレイクアウトルーム」（主催者のみ）</td></tr>
+          <tr><td><strong>ホワイトボード</strong></td><td>共同でアイデアを書き出す</td><td>「&#8942;」→「ホワイトボード」</td></tr>
+          <tr><td><strong>背景変更</strong></td><td>仮想背景やぼかし</td><td>「&#8942;」→「ビジュアルエフェクトを適用」</td></tr>
+        </tbody>
+      </table>
+
+      <div class="callout callout-success">
+        <div class="callout-title">&#9989; Meet のマナーTips</div>
+        <ul style="padding-left: 20px;">
+          <li>発言しない時は<strong>ミュート</strong>にする（<kbd>Cmd</kbd>+<kbd>D</kbd>）</li>
+          <li>発言したい時は<strong>挙手</strong>機能を使う</li>
+          <li>画面共有前に不要なタブや通知を閉じる</li>
+          <li>大人数の会議ではチャットも活用する</li>
+        </ul>
+      </div>
+    </div>
+
+    <div class="section">
+      <h3>4.4 Calendar × Meet の連携フロー</h3>
+      <div class="diagram">
+        <div class="diagram-title">会議セットアップの最適フロー</div>
+        <div class="flow">
+          <div class="flow-item flow-blue">&#128197; カレンダーで予定作成</div>
+          <span class="flow-arrow">&#10145;&#65039;</span>
+          <div class="flow-item flow-green">&#127909; Meetリンク自動生成</div>
+          <span class="flow-arrow">&#10145;&#65039;</span>
+          <div class="flow-item flow-yellow">&#128196; アジェンダをDriveから添付</div>
+          <span class="flow-arrow">&#10145;&#65039;</span>
+          <div class="flow-item flow-purple">&#128231; 招待メールが自動送信</div>
+        </div>
+      </div>
+    </div>
+  </div>
+</div>
+
+<!-- ============================================================ -->
+<!-- CHAPTER 5 -->
+<!-- ============================================================ -->
+<div class="chapter ch5" id="ch5">
+  <div class="chapter-header">
+    <h2>第5章 自動化 & AI連携</h2>
+    <p>Google Workspaceを最大限に活用する</p>
+  </div>
+  <div class="chapter-body">
+
+    <div class="section">
+      <h3>5.1 Google Apps Script（GAS）で自動化</h3>
+      <p><strong>Google Apps Script</strong> はGoogleが提供するプログラミング環境です。JavaScriptベースで、Gmail・Drive・スプレッドシートなどを<strong>自動操作</strong>できます。</p>
+
+      <div class="callout callout-info">
+        <div class="callout-title">&#128161; GASの始め方</div>
+        <p>スプレッドシートを開く → <strong>拡張機能 → Apps Script</strong> → エディタが開く。ここにコードを書いて実行するだけ！</p>
+      </div>
+
+      <h4>例1: スプレッドシートからメールを自動送信</h4>
+      <pre><span class="comment">// スプレッドシートの名前・メールアドレスを元に一括メール送信</span>
+<span class="key">function</span> <span class="func">sendEmails</span>() {
+  <span class="key">const</span> sheet = SpreadsheetApp.<span class="func">getActiveSpreadsheet</span>().<span class="func">getActiveSheet</span>();
+  <span class="key">const</span> data = sheet.<span class="func">getDataRange</span>().<span class="func">getValues</span>();
+
+  <span class="comment">// 1行目はヘッダーなのでスキップ（i=1から開始）</span>
+  <span class="key">for</span> (<span class="key">let</span> i = 1; i &lt; data.length; i++) {
+    <span class="key">const</span> name = data[i][0];     <span class="comment">// A列: 名前</span>
+    <span class="key">const</span> email = data[i][1];    <span class="comment">// B列: メールアドレス</span>
+    <span class="key">const</span> subject = <span class="string">"お知らせ"</span>;
+    <span class="key">const</span> body = name + <span class="string">"さん\n\nご連絡です。"</span>;
+
+    GmailApp.<span class="func">sendEmail</span>(email, subject, body);
+  }
+}</pre>
+
+      <h4>例2: 毎朝の日報リマインダー</h4>
+      <pre><span class="comment">// トリガーで毎日17:00に実行するよう設定</span>
+<span class="key">function</span> <span class="func">sendDailyReminder</span>() {
+  <span class="key">const</span> email = <span class="string">"team@example.com"</span>;
+  <span class="key">const</span> subject = <span class="string">"【リマインダー】日報の提出"</span>;
+  <span class="key">const</span> body = <span class="string">"本日の日報を提出してください。\nhttps://forms.google.com/xxx"</span>;
+
+  GmailApp.<span class="func">sendEmail</span>(email, subject, body);
+}</pre>
+
+      <h4>例3: フォーム回答をSlackに通知</h4>
+      <pre><span class="comment">// フォーム送信時にSlackに通知を送る</span>
+<span class="key">function</span> <span class="func">onFormSubmit</span>(e) {
+  <span class="key">const</span> responses = e.response.<span class="func">getItemResponses</span>();
+  <span class="key">let</span> message = <span class="string">"&#128227; 新しいフォーム回答:\n"</span>;
+
+  responses.<span class="func">forEach</span>(r =&gt; {
+    message += r.<span class="func">getItem</span>().<span class="func">getTitle</span>() + <span class="string">": "</span> + r.<span class="func">getResponse</span>() + <span class="string">"\n"</span>;
+  });
+
+  <span class="key">const</span> webhook = <span class="string">"https://hooks.slack.com/services/xxx"</span>;
+  UrlFetchApp.<span class="func">fetch</span>(webhook, {
+    method: <span class="string">"post"</span>,
+    contentType: <span class="string">"application/json"</span>,
+    payload: JSON.<span class="func">stringify</span>({ text: message })
+  });
+}</pre>
+
+      <div class="callout callout-success">
+        <div class="callout-title">&#9989; GASでできること例</div>
+        <ul style="padding-left: 20px;">
+          <li>スプレッドシートの定期レポート自動生成</li>
+          <li>Gmailの特定メールを自動でスプレッドシートに記録</li>
+          <li>カレンダーの予定を自動で作成</li>
+          <li>フォームの回答に応じて自動返信メールを送信</li>
+          <li>Driveのファイルを定期的にバックアップ</li>
+        </ul>
+      </div>
+    </div>
+
+    <div class="section">
+      <h3>5.2 Gemini（AI）との連携</h3>
+      <p>GoogleのAI「Gemini」がWorkspaceの各アプリに統合されています。</p>
+
+      <table class="compare-table">
+        <thead><tr><th>アプリ</th><th>Geminiでできること</th><th>具体例</th></tr></thead>
+        <tbody>
+          <tr><td><strong>Gmail</strong></td><td>メールの下書き生成、要約、返信案の作成</td><td>「このメールへの丁寧な断りの返信を書いて」</td></tr>
+          <tr><td><strong>ドキュメント</strong></td><td>文章の作成、要約、書き換え</td><td>「この議事録を箇条書きでまとめて」</td></tr>
+          <tr><td><strong>スプレッドシート</strong></td><td>数式の生成、データ分析</td><td>「売上の前年比を計算する数式を作って」</td></tr>
+          <tr><td><strong>スライド</strong></td><td>スライドの自動生成、画像生成</td><td>「新製品発表のスライドを5枚作って」</td></tr>
+          <tr><td><strong>Meet</strong></td><td>会議の要約、議事録の自動生成</td><td>会議終了後に自動で要約が届く</td></tr>
+        </tbody>
+      </table>
+
+      <div class="callout callout-purple">
+        <div class="callout-title">&#128161; Geminiの使い方</div>
+        各アプリの右サイドバーに表示される<strong>Geminiアイコン（&#10024;）</strong>をクリック → 自然言語で指示を入力するだけ。
+      </div>
+    </div>
+
+    <div class="section">
+      <h3>5.3 外部サービスとの連携</h3>
+
+      <div class="diagram">
+        <div class="diagram-title">Google Workspace × 外部サービス連携図</div>
+        <svg viewBox="0 0 700 200" style="max-width: 700px;">
+          <!-- Center: Google Workspace -->
+          <rect x="240" y="60" width="220" height="80" rx="14" fill="#e8f0fe" stroke="#4285f4" stroke-width="2"/>
+          <text x="350" y="95" text-anchor="middle" font-size="14" font-weight="700" fill="#4285f4">Google Workspace</text>
+          <text x="350" y="118" text-anchor="middle" font-size="11" fill="#5f6368">Gmail / Drive / Calendar / Sheets</text>
+
+          <!-- Left: Slack -->
+          <rect x="20" y="20" width="140" height="50" rx="10" fill="#4a154b" opacity="0.1" stroke="#4a154b" stroke-width="1.5"/>
+          <text x="90" y="50" text-anchor="middle" font-size="12" font-weight="600" fill="#4a154b">&#128172; Slack</text>
+          <line x1="160" y1="50" x2="240" y2="85" stroke="#4a154b" stroke-width="1.5" opacity="0.5" marker-end="url(#arrow)"/>
+
+          <!-- Left: Notion -->
+          <rect x="20" y="130" width="140" height="50" rx="10" fill="#191919" opacity="0.1" stroke="#191919" stroke-width="1.5"/>
+          <text x="90" y="160" text-anchor="middle" font-size="12" font-weight="600" fill="#191919">&#128221; Notion</text>
+          <line x1="160" y1="150" x2="240" y2="115" stroke="#191919" stroke-width="1.5" opacity="0.5" marker-end="url(#arrow)"/>
+
+          <!-- Right: Zapier -->
+          <rect x="540" y="20" width="140" height="50" rx="10" fill="#ff4a00" opacity="0.1" stroke="#ff4a00" stroke-width="1.5"/>
+          <text x="610" y="50" text-anchor="middle" font-size="12" font-weight="600" fill="#ff4a00">&#9889; Zapier / Make</text>
+          <line x1="460" y1="85" x2="540" y2="50" stroke="#ff4a00" stroke-width="1.5" opacity="0.5"/>
+
+          <!-- Right: Claude -->
+          <rect x="540" y="130" width="140" height="50" rx="10" fill="#7627bb" opacity="0.1" stroke="#7627bb" stroke-width="1.5"/>
+          <text x="610" y="160" text-anchor="middle" font-size="12" font-weight="600" fill="#7627bb">&#129302; Claude / AI</text>
+          <line x1="460" y1="115" x2="540" y2="150" stroke="#7627bb" stroke-width="1.5" opacity="0.5"/>
+
+          <defs><marker id="arrow" viewBox="0 0 10 10" refX="9" refY="5" markerWidth="5" markerHeight="5" orient="auto"><path d="M 0 0 L 10 5 L 0 10 z" fill="#888"/></marker></defs>
+        </svg>
+      </div>
+
+      <table class="compare-table">
+        <thead><tr><th>連携先</th><th>何ができるか</th></tr></thead>
+        <tbody>
+          <tr><td><strong>Slack</strong></td><td>Gmailの通知をSlackに転送、Calendarの予定をSlackに自動投稿、Drive更新通知</td></tr>
+          <tr><td><strong>Notion</strong></td><td>スプレッドシートのデータをNotionに同期、カレンダー連携</td></tr>
+          <tr><td><strong>Zapier / Make</strong></td><td>ノーコードで自動化。「フォーム回答→スプレッドシート記録→メール送信→Slack通知」を一気に自動化</td></tr>
+          <tr><td><strong>Claude / ChatGPT</strong></td><td>GASからAPI呼び出しで、メールの自動分類・要約、レポート自動生成</td></tr>
+        </tbody>
+      </table>
+    </div>
+
+    <div class="section">
+      <h3>5.4 管理コンソール（管理者向け）</h3>
+      <p>Google Workspace有料プランの管理者は<strong>admin.google.com</strong>から組織全体を管理できます。</p>
+
+      <div class="three-col">
+        <div class="app-card">
+          <div class="app-icon">&#128101;</div>
+          <h4>ユーザー管理</h4>
+          <p>アカウントの作成・削除、パスワードリセット、グループ管理</p>
+        </div>
+        <div class="app-card">
+          <div class="app-icon">&#128274;</div>
+          <h4>セキュリティ</h4>
+          <p>2段階認証の強制、外部共有ポリシー、監査ログ</p>
+        </div>
+        <div class="app-card">
+          <div class="app-icon">&#9881;&#65039;</div>
+          <h4>アプリ設定</h4>
+          <p>各アプリの有効/無効、機能制限、ストレージ割当</p>
+        </div>
+      </div>
+    </div>
+  </div>
+</div>
+
+<!-- ===== チートシート ===== -->
+<div class="chapter" style="margin-bottom: 40px;">
+  <div class="chapter-header" style="background: linear-gradient(135deg, #202124, #5f6368);">
+    <h2>&#128209; Google Workspace チートシート</h2>
+    <p>よく使う操作をまとめました</p>
+  </div>
+  <div class="chapter-body">
+
+    <h4>&#9993;&#65039; Gmail 検索演算子</h4>
+    <table class="compare-table">
+      <tr><td><code>from:tanaka</code></td><td>送信者で検索</td></tr>
+      <tr><td><code>has:attachment filename:pdf</code></td><td>PDF添付メール</td></tr>
+      <tr><td><code>after:2026/01/01 before:2026/04/01</code></td><td>期間指定</td></tr>
+      <tr><td><code>is:unread label:仕事</code></td><td>「仕事」ラベルの未読</td></tr>
+      <tr><td><code>larger:5M</code></td><td>5MB以上のメール</td></tr>
+    </table>
+
+    <h4 style="margin-top: 24px;">&#9000;&#65039; ショートカットキー（共通）</h4>
+    <table class="compare-table">
+      <thead><tr><th>アプリ</th><th>ショートカット</th><th>動作</th></tr></thead>
+      <tbody>
+        <tr><td>Gmail</td><td><kbd>c</kbd></td><td>新規作成</td></tr>
+        <tr><td>Gmail</td><td><kbd>/</kbd></td><td>検索</td></tr>
+        <tr><td>Gmail</td><td><kbd>e</kbd></td><td>アーカイブ</td></tr>
+        <tr><td>Docs</td><td><kbd>Cmd</kbd>+<kbd>Option</kbd>+<kbd>M</kbd></td><td>コメント追加</td></tr>
+        <tr><td>Sheets</td><td><kbd>Cmd</kbd>+<kbd>/</kbd></td><td>ショートカット一覧</td></tr>
+        <tr><td>Meet</td><td><kbd>Cmd</kbd>+<kbd>D</kbd></td><td>ミュート切替</td></tr>
+        <tr><td>Meet</td><td><kbd>Cmd</kbd>+<kbd>E</kbd></td><td>カメラ切替</td></tr>
+      </tbody>
+    </table>
+
+    <h4 style="margin-top: 24px;">&#128202; スプレッドシート必須関数</h4>
+    <table class="compare-table">
+      <tr><td><code>=SUM(A:A)</code></td><td>合計</td></tr>
+      <tr><td><code>=VLOOKUP(検索値,範囲,列番号,FALSE)</code></td><td>表引き</td></tr>
+      <tr><td><code>=IF(条件,真の値,偽の値)</code></td><td>条件分岐</td></tr>
+      <tr><td><code>=UNIQUE(範囲)</code></td><td>重複除去</td></tr>
+      <tr><td><code>=ARRAYFORMULA(数式)</code></td><td>一括適用</td></tr>
+    </table>
+  </div>
+</div>
+
+<!-- ===== Footer ===== -->
+<div class="footer">
+  <p><strong>Google Workspace 完全マスター講座</strong></p>
+  <p>Created with Claude Code | Last updated: 2026-04-18</p>
+</div>
+
+</div>
+</body>
+</html>
