@@ -1,0 +1,605 @@
+<!DOCTYPE html>
+<html lang="ja">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>【スタッフ向け】グループアドレス送信設定マニュアル</title>
+  <style>
+    :root {
+      --green: #2e7d32;
+      --green-light: #e8f5e9;
+      --green-mid: #81c784;
+      --orange: #e65100;
+      --orange-light: #fff3e0;
+      --blue: #1565c0;
+      --blue-light: #e3f2fd;
+      --red: #c62828;
+      --red-light: #ffebee;
+      --gray: #546e7a;
+      --gray-bg: #f5f7f8;
+      --border: #dce3e6;
+    }
+    * { box-sizing: border-box; margin: 0; padding: 0; }
+    body {
+      font-family: "Hiragino Sans", "Noto Sans JP", "Yu Gothic", sans-serif;
+      font-size: 15px;
+      color: #212121;
+      background: #eef2ee;
+      line-height: 1.85;
+    }
+    .page {
+      max-width: 740px;
+      margin: 28px auto 48px;
+      background: #fff;
+      border-radius: 16px;
+      box-shadow: 0 4px 28px rgba(0,0,0,.11);
+      overflow: hidden;
+    }
+
+    /* ── ヘッダー ── */
+    header {
+      background: linear-gradient(135deg, #1b5e20, #2e7d32 70%, #388e3c);
+      color: #fff;
+      padding: 36px 44px 30px;
+    }
+    .h-badge {
+      display: inline-block;
+      background: rgba(255,255,255,.22);
+      border: 1px solid rgba(255,255,255,.35);
+      border-radius: 20px;
+      padding: 3px 14px;
+      font-size: 12px;
+      margin-bottom: 12px;
+      letter-spacing: .05em;
+    }
+    header h1 { font-size: 22px; font-weight: 700; line-height: 1.4; margin-bottom: 8px; }
+    header p  { font-size: 13px; opacity: .88; }
+
+    /* ── ゴールボックス ── */
+    .goal-box {
+      margin: 28px 44px 0;
+      background: var(--green-light);
+      border: 2px solid var(--green-mid);
+      border-radius: 12px;
+      padding: 18px 22px;
+    }
+    .goal-box h2 { font-size: 14px; color: var(--green); margin-bottom: 8px; font-weight: 700; }
+    .goal-box p  { font-size: 14px; line-height: 1.75; }
+
+    /* ── 全体の流れ ── */
+    .flow {
+      display: flex;
+      align-items: center;
+      gap: 0;
+      margin: 24px 44px 0;
+      overflow-x: auto;
+    }
+    .flow-item {
+      flex: 1;
+      min-width: 100px;
+      text-align: center;
+      padding: 10px 6px;
+      background: var(--gray-bg);
+      border: 1px solid var(--border);
+      border-radius: 8px;
+      font-size: 12px;
+      line-height: 1.4;
+    }
+    .flow-item .fn { font-weight: 700; color: var(--green); font-size: 13px; margin-bottom: 2px; }
+    .flow-arrow {
+      color: #90a4ae;
+      font-size: 20px;
+      padding: 0 6px;
+      flex-shrink: 0;
+    }
+
+    /* ── ボディ ── */
+    .body { padding: 28px 44px 52px; }
+
+    /* ── ステップカード ── */
+    .step-card {
+      border: 1px solid var(--border);
+      border-radius: 12px;
+      overflow: hidden;
+      margin-bottom: 24px;
+    }
+    .step-head {
+      display: flex; align-items: center; gap: 14px;
+      padding: 13px 20px;
+      color: #fff;
+    }
+    .step-head.g  { background: var(--green); }
+    .step-head.b  { background: var(--blue); }
+    .step-head.o  { background: var(--orange); }
+    .step-num {
+      background: rgba(255,255,255,.25);
+      border-radius: 50%;
+      width: 30px; height: 30px;
+      display: flex; align-items: center; justify-content: center;
+      font-size: 14px; font-weight: 700; flex-shrink: 0;
+    }
+    .step-head h3 { font-size: 15px; font-weight: 700; }
+    .step-head .badge {
+      margin-left: auto;
+      background: rgba(255,255,255,.25);
+      border-radius: 10px;
+      padding: 2px 10px;
+      font-size: 11px;
+    }
+    .step-body { padding: 18px 22px; }
+
+    /* ── 操作パス ── */
+    .path {
+      display: flex; align-items: center; flex-wrap: wrap; gap: 4px;
+      background: #eceff1;
+      border-radius: 8px;
+      padding: 9px 14px;
+      margin: 10px 0 14px;
+      font-size: 13px; font-weight: 600;
+    }
+    .path .arr { color: #90a4ae; font-size: 18px; }
+
+    /* ── 画面モック ── */
+    .mock {
+      border: 1px solid #cfd8dc;
+      border-radius: 10px;
+      overflow: hidden;
+      margin: 12px 0;
+      font-size: 13px;
+      box-shadow: 0 2px 8px rgba(0,0,0,.06);
+    }
+    .mock-bar {
+      background: #f1f3f4;
+      border-bottom: 1px solid #e0e0e0;
+      padding: 7px 12px;
+      display: flex; align-items: center; gap: 7px;
+    }
+    .dot { width: 10px; height: 10px; border-radius: 50%; }
+    .dot.r { background: #ff5f57; }
+    .dot.y { background: #febc2e; }
+    .dot.g { background: #28c840; }
+    .mock-url { flex: 1; background: #fff; border: 1px solid #e0e0e0; border-radius: 12px; padding: 3px 12px; font-size: 11.5px; color: #555; }
+    .mock-body { padding: 14px 18px; background: #fff; }
+
+    /* Gmail タブ */
+    .tabs { display: flex; border-bottom: 2px solid #e0e0e0; margin-bottom: 14px; }
+    .tab { padding: 7px 14px; font-size: 12.5px; color: #888; cursor: pointer; }
+    .tab.on { color: #1a73e8; border-bottom: 2px solid #1a73e8; font-weight: 700; margin-bottom: -2px; }
+
+    /* 設定行 */
+    .srow { display: flex; gap: 14px; padding: 10px 0; border-bottom: 1px solid #f5f5f5; }
+    .slabel { width: 155px; flex-shrink: 0; font-size: 12.5px; color: #555; }
+    .svalue { flex: 1; font-size: 12.5px; }
+
+    /* ボタン類 */
+    .btn-blue { display: inline-block; background: #1a73e8; color: #fff; border-radius: 4px; padding: 5px 14px; font-size: 12.5px; font-weight: 700; }
+    .btn-link { color: #1a73e8; text-decoration: underline; font-weight: 600; cursor: pointer; font-size: 13px; }
+    .hl-badge { display: inline-block; background: var(--orange); color: #fff; border-radius: 4px; padding: 1px 8px; font-size: 11px; font-weight: 700; margin-left: 6px; vertical-align: middle; }
+
+    /* フォーム */
+    .form-row { margin-bottom: 11px; }
+    .form-row label { display: block; font-size: 11.5px; color: #666; margin-bottom: 4px; font-weight: 700; }
+    .finput { width: 100%; border: 1px solid #dadce0; border-radius: 4px; padding: 7px 10px; font-size: 13px; }
+    .finput.filled { background: #f0fdf0; color: #1a5c1e; border-color: #a5d6a7; }
+    .finput.empty  { color: #aaa; }
+    .check-row { display: flex; align-items: center; gap: 8px; font-size: 12.5px; color: #555; margin: 8px 0; }
+
+    /* SMTPグリッド */
+    .smtp-grid { display: grid; grid-template-columns: 1fr 1fr; gap: 10px; margin: 10px 0; }
+    .smtp-grid .full { grid-column: 1 / -1; }
+    .smtp-grid label { display: block; font-size: 11.5px; color: #666; margin-bottom: 4px; font-weight: 700; }
+    .smtp-grid input { width: 100%; border: 1px solid #dadce0; border-radius: 4px; padding: 6px 10px; font-size: 12.5px; }
+    .smtp-grid input.filled { background: #f0fdf0; color: #1a5c1e; border-color: #a5d6a7; }
+    .smtp-grid input.orange { background: #fff3e0; color: #bf360c; border-color: #ffb74d; }
+
+    /* アプリパスワード画面 */
+    .app-pw-box {
+      background: #fff9c4;
+      border: 2px solid #f9a825;
+      border-radius: 10px;
+      padding: 16px 20px;
+      margin: 12px 0;
+    }
+    .app-pw-box .label { font-size: 12px; color: #555; margin-bottom: 8px; }
+    .app-pw-display {
+      font-family: "Menlo","Consolas",monospace;
+      font-size: 22px;
+      font-weight: 700;
+      letter-spacing: 4px;
+      color: #1a1a1a;
+      text-align: center;
+      padding: 10px;
+      background: #fff;
+      border-radius: 6px;
+      border: 1px solid #f9a825;
+      margin: 8px 0;
+    }
+    .app-pw-note { font-size: 12px; color: #e65100; font-weight: 700; text-align: center; }
+
+    /* 差出人切替 */
+    .from-box { background: #f8f9fa; border: 1px solid #e0e0e0; border-radius: 8px; padding: 10px 14px; margin: 10px 0; }
+    .from-label { font-size: 11px; color: #888; margin-bottom: 6px; }
+    .from-opts { display: flex; flex-wrap: wrap; gap: 8px; }
+    .from-opt { padding: 5px 14px; border-radius: 20px; font-size: 12px; cursor: pointer; }
+    .from-me  { background: #f0f0f0; border: 1px solid #ddd; color: #555; }
+    .from-grp { background: #e8f5e9; border: 2px solid #66bb6a; color: #2e7d32; font-weight: 700; }
+
+    /* 注意ボックス */
+    .box { border-radius: 8px; padding: 13px 17px; margin: 12px 0; font-size: 13px; }
+    .box.info   { background: var(--blue-light); border-left: 4px solid var(--blue); }
+    .box.warn   { background: var(--orange-light); border-left: 4px solid var(--orange); }
+    .box.tip    { background: var(--green-light); border-left: 4px solid var(--green); }
+    .box.danger { background: var(--red-light); border-left: 4px solid var(--red); }
+    .box .ttl   { font-weight: 700; margin-bottom: 5px; }
+    .box.info .ttl   { color: var(--blue); }
+    .box.warn .ttl   { color: var(--orange); }
+    .box.tip  .ttl   { color: var(--green); }
+    .box.danger .ttl { color: var(--red); }
+
+    code {
+      font-family: "Menlo","Consolas",monospace;
+      background: #eceff1;
+      padding: 2px 7px;
+      border-radius: 4px;
+      font-size: 12.5px;
+      color: #37474f;
+    }
+
+    /* チェックリスト */
+    .checklist { list-style: none; padding: 0; }
+    .checklist li { display: flex; align-items: flex-start; gap: 10px; padding: 7px 0; border-bottom: 1px solid #f0f0f0; font-size: 13.5px; }
+    .checklist li:last-child { border-bottom: none; }
+    .checklist .icon { font-size: 17px; flex-shrink: 0; margin-top: 1px; }
+
+    /* 完了 */
+    .done {
+      background: var(--green);
+      color: #fff;
+      border-radius: 12px;
+      padding: 22px;
+      text-align: center;
+      margin-top: 32px;
+    }
+    .done .big { font-size: 22px; font-weight: 700; margin-bottom: 6px; }
+    .done p { font-size: 13px; opacity: .9; }
+
+    /* セクション見出し */
+    .sec-title {
+      font-size: 11px;
+      font-weight: 700;
+      letter-spacing: .1em;
+      color: var(--gray);
+      text-transform: uppercase;
+      margin: 32px 0 12px;
+      padding-bottom: 6px;
+      border-bottom: 1px solid var(--border);
+    }
+
+    /* 区切り線 */
+    hr { border: none; border-top: 1px solid var(--border); margin: 28px 0; }
+
+    footer { background: var(--gray-bg); border-top: 1px solid var(--border); padding: 16px 44px; font-size: 12px; color: var(--gray); }
+
+    @media (max-width: 600px) {
+      header, .body, .goal-box, .flow { padding-left: 20px; padding-right: 20px; }
+      .goal-box, .flow { margin-left: 20px; margin-right: 20px; }
+      .smtp-grid { grid-template-columns: 1fr; }
+      .smtp-grid .full { grid-column: 1; }
+      .flow { flex-direction: column; }
+      .flow-arrow { transform: rotate(90deg); }
+    }
+  </style>
+</head>
+<body>
+<div class="page">
+
+  <!-- ヘッダー -->
+  <header>
+    <div class="h-badge">スタッフ向け設定ガイド</div>
+    <h1>グループアドレスで<br>メールを送れるようにする設定</h1>
+    <p>自分のGmailから「はなひらく」「叶花」などの名前でメールを送れるようになります</p>
+  </header>
+
+  <!-- ゴール -->
+  <div class="goal-box">
+    <h2>📬 この設定でできること</h2>
+    <p>
+      自分のGmailアカウント（例：<code>ka.maeda28@gmail.com</code>）を使いながら、<br>
+      <strong>差出人を <code>kanoka@hanahiraku-group.com</code> に切り替えて</strong>送受信できます。<br>
+      相手には「叶花-kanoka-」から届いたように表示されます。
+    </p>
+  </div>
+
+  <!-- 全体の流れ -->
+  <div class="flow">
+    <div class="flow-item"><div class="fn">STEP 1</div>2段階認証を<br>オンにする</div>
+    <div class="flow-arrow">›</div>
+    <div class="flow-item"><div class="fn">STEP 2</div>アプリパスワードを<br>発行する</div>
+    <div class="flow-arrow">›</div>
+    <div class="flow-item"><div class="fn">STEP 3</div>Gmailに<br>アドレスを追加</div>
+    <div class="flow-arrow">›</div>
+    <div class="flow-item"><div class="fn">STEP 4</div>確認メールを<br>承認する</div>
+    <div class="flow-arrow">›</div>
+    <div class="flow-item"><div class="fn">完了</div>切り替えて<br>送信！</div>
+  </div>
+
+  <div class="body">
+
+    <div class="box danger" style="margin-top:8px;">
+      <div class="ttl">🔐 2段階認証はセキュリティのためにも必ずオンにしてください</div>
+      この設定に必要なだけでなく、<strong>Googleアカウントを不正アクセスから守るために全員必須</strong>です。
+      オフのままだとアカウントが乗っ取られるリスクがあります。この機会に必ず設定しましょう。
+    </div>
+    <div class="box warn" style="margin-top:8px;">
+      <div class="ttl">⚠ パソコンのブラウザで作業してください</div>
+      スマートフォンでは設定できません。Chrome や Safari でGmailを開いて作業してください。
+    </div>
+
+    <!-- ━━━━━ STEP 1 ━━━━━ -->
+    <div class="sec-title">準備（1回だけ）</div>
+
+    <div class="step-card">
+      <div class="step-head b">
+        <div class="step-num">1</div>
+        <h3>Googleアカウントの「2段階認証」をオンにする</h3>
+        <span class="badge">1回だけ</span>
+      </div>
+      <div class="step-body">
+        <p style="margin-bottom:12px;">アプリパスワードを使うには、まず2段階認証が必要です。すでにオンの方はSTEP 2へ。</p>
+
+        <p style="font-weight:700; margin-bottom:6px;">以下のURLを新しいタブで開く：</p>
+        <div style="background:#eceff1; border-radius:8px; padding:10px 14px; font-family:monospace; font-size:14px; margin-bottom:14px; color:#1a73e8; word-break:break-all;">
+          https://myaccount.google.com/security
+        </div>
+
+        <ul class="checklist">
+          <li><span class="icon">1️⃣</span><span>「Googleへのログイン」の項目にある「<strong>2段階認証プロセス</strong>」をクリック</span></li>
+          <li><span class="icon">2️⃣</span><span>「使ってみる」をクリックして、画面の指示に従って設定する（スマホへの通知や電話番号で確認）</span></li>
+          <li><span class="icon">3️⃣</span><span>「<strong>オン</strong>」になれば完了</span></li>
+        </ul>
+
+        <div class="box tip">
+          <div class="ttl">✅ すでに2段階認証がオンの方</div>
+          Gmailにログインするとき、スマホに「ログインしましたか？」という通知が来る方はすでにオンです。STEP 2へ進んでください。
+        </div>
+      </div>
+    </div>
+
+    <!-- ━━━━━ STEP 2 ━━━━━ -->
+    <div class="step-card">
+      <div class="step-head b">
+        <div class="step-num">2</div>
+        <h3>「アプリパスワード」を発行する</h3>
+        <span class="badge">1回だけ</span>
+      </div>
+      <div class="step-body">
+        <p style="margin-bottom:12px;">Gmailに別のアドレスを追加するための、専用パスワードを発行します。</p>
+
+        <p style="font-weight:700; margin-bottom:6px;">以下のURLを新しいタブで開く：</p>
+        <div style="background:#eceff1; border-radius:8px; padding:10px 14px; font-family:monospace; font-size:14px; margin-bottom:14px; color:#1a73e8; word-break:break-all;">
+          https://myaccount.google.com/apppasswords
+        </div>
+
+        <ul class="checklist">
+          <li>
+            <span class="icon">1️⃣</span>
+            <span>「アプリ名」の入力欄に <strong>はなひらく</strong> と入力する<br>
+            <span style="font-size:12px; color:#888;">（名前はなんでもOKです。わかりやすい名前にしましょう）</span></span>
+          </li>
+          <li><span class="icon">2️⃣</span><span>「<strong>作成</strong>」をクリックする</span></li>
+          <li>
+            <span class="icon">3️⃣</span>
+            <span>黄色いボックスに <strong>16文字のパスワード</strong> が表示される<br>
+            <span style="font-size:12px; color:var(--red); font-weight:700;">⚠ このパスワードは今しか表示されません。必ずコピーしてメモしておく！</span></span>
+          </li>
+        </ul>
+
+        <!-- アプリパスワード表示モック -->
+        <div class="app-pw-box">
+          <div class="label">🔑 生成されたアプリパスワード（例）</div>
+          <div class="app-pw-display">abcd efgh ijkl mnop</div>
+          <div class="app-pw-note">このパスワードを必ずコピーしてメモしておく！</div>
+        </div>
+
+        <div class="box warn">
+          <div class="ttl">このページが開けない場合</div>
+          STEP 1 の2段階認証がまだオンになっていない可能性があります。STEP 1 を完了してから再試行してください。
+        </div>
+      </div>
+    </div>
+
+    <hr />
+    <div class="sec-title">Gmailへの追加設定</div>
+
+    <!-- ━━━━━ STEP 3 ━━━━━ -->
+    <div class="step-card">
+      <div class="step-head g">
+        <div class="step-num">3</div>
+        <h3>Gmailにグループアドレスを追加する</h3>
+      </div>
+      <div class="step-body">
+
+        <p style="margin-bottom:12px;"><strong>① Gmailの設定を開く</strong></p>
+        <div class="path">
+          <span>Gmail を開く</span><span class="arr">›</span>
+          <span>右上 ⚙️</span><span class="arr">›</span>
+          <span>すべての設定を表示</span><span class="arr">›</span>
+          <span style="color:var(--red); font-weight:800;">「アカウント」タブ</span>
+        </div>
+
+        <div class="mock">
+          <div class="mock-bar">
+            <div class="dot r"></div><div class="dot y"></div><div class="dot g"></div>
+            <div class="mock-url">mail.google.com › 設定 › アカウント</div>
+          </div>
+          <div class="mock-body">
+            <div class="tabs">
+              <div class="tab">全般</div>
+              <div class="tab on">アカウント</div>
+              <div class="tab">フィルタ</div>
+            </div>
+            <div class="srow">
+              <div class="slabel" style="font-weight:700; color:#333; line-height:1.4;">名前：<br><span style="font-size:11px; font-weight:400; color:#888;">他のアドレスとして<br>メールを送信</span></div>
+              <div class="svalue">
+                <div style="font-size:12.5px; color:#666; margin-bottom:8px;">（自分のアドレス）＜デフォルト＞</div>
+                <span style="font-size:18px; margin-right:4px;">👉</span>
+                <span class="btn-link">他のメール アドレスを追加</span>
+                <span class="hl-badge">← ここをクリック</span>
+                <div class="box danger" style="margin-top:10px; padding:8px 12px; font-size:12px;">
+                  <strong>「メール アカウントを追加する」は押さないで！</strong>（別の機能です）
+                </div>
+              </div>
+            </div>
+          </div>
+        </div>
+
+        <p style="font-weight:700; margin: 18px 0 10px;">② ポップアップに入力する</p>
+        <div class="mock" style="max-width:460px;">
+          <div class="mock-bar"><div class="dot r"></div><div class="dot y"></div><div class="dot g"></div></div>
+          <div class="mock-body">
+            <p style="font-weight:700; font-size:13px; margin-bottom:12px;">別のメールアドレスを追加</p>
+            <div class="form-row">
+              <label>名前（相手に表示される名前）</label>
+              <input class="finput filled" type="text" value="叶花-kanoka-　← 担当者から指定された名前" readonly />
+            </div>
+            <div class="form-row">
+              <label>メールアドレス</label>
+              <input class="finput filled" type="text" value="kanoka@hanahiraku-group.com" readonly />
+            </div>
+            <div class="check-row">
+              <input type="checkbox" checked readonly style="width:14px;height:14px;" />
+              <span>エイリアスとして扱います（チェックしたまま）</span>
+            </div>
+            <div style="text-align:right; margin-top:10px;">
+              <span class="btn-blue">次のステップ »</span>
+            </div>
+          </div>
+        </div>
+
+        <div class="box tip" style="margin-top:4px;">
+          <div class="ttl">どのアドレスを入力するか</div>
+          <ul style="padding-left:18px; margin-top:4px;">
+            <li>はなひらく → <code>kotobuki@hanahiraku-group.com</code></li>
+            <li>はなひらく塩尻 → <code>shiojin@hanahiraku-group.com</code></li>
+            <li>グループホームsoil → <code>soil@hanahiraku-group.com</code></li>
+            <li>叶花-kanoka- → <code>kanoka@hanahiraku-group.com</code></li>
+          </ul>
+        </div>
+
+        <p style="font-weight:700; margin: 18px 0 10px;">③ SMTP画面に入力する</p>
+        <p style="font-size:13.5px; margin-bottom:12px;">「次のステップ」を押すと以下の画面が出ます。<strong>そのまま下の通りに入力</strong>してください。</p>
+
+        <div class="mock" style="max-width:100%;">
+          <div class="mock-bar"><div class="dot r"></div><div class="dot y"></div><div class="dot g"></div></div>
+          <div class="mock-body">
+            <p style="font-weight:700; font-size:13px; margin-bottom:12px;">SMTPサーバー経由でメールを送信します</p>
+            <div class="smtp-grid">
+              <div class="full">
+                <label>SMTPサーバー</label>
+                <input class="filled" type="text" value="smtp.gmail.com" readonly />
+              </div>
+              <div>
+                <label>ポート</label>
+                <input class="filled" type="text" value="587" readonly />
+              </div>
+              <div>
+                <label>セキュリティ</label>
+                <input class="filled" type="text" value="TLS（推奨）を選ぶ" readonly />
+              </div>
+              <div class="full">
+                <label>ユーザー名</label>
+                <input class="filled" type="text" value="自分のGmailアドレス（例：ka.maeda28@gmail.com）" readonly />
+              </div>
+              <div class="full">
+                <label>パスワード</label>
+                <input class="orange" type="text" value="← STEP 2 で発行した16文字のアプリパスワードを貼り付ける" readonly />
+              </div>
+            </div>
+            <div style="text-align:right; margin-top:12px;">
+              <span class="btn-blue">アカウントを追加 »</span>
+            </div>
+          </div>
+        </div>
+
+        <div class="box warn">
+          <div class="ttl">⚠ よくある間違い</div>
+          <ul style="padding-left:18px; margin-top:4px;">
+            <li>ユーザー名に <code>kanoka</code> だけ入れてしまう → <strong>自分のGmailアドレスをフルで入力</strong></li>
+            <li>パスワードに通常のGmailパスワードを入れてしまう → <strong>STEP 2のアプリパスワードを使う</strong></li>
+          </ul>
+        </div>
+      </div>
+    </div>
+
+    <!-- ━━━━━ STEP 4 ━━━━━ -->
+    <div class="step-card">
+      <div class="step-head g">
+        <div class="step-num">4</div>
+        <h3>届いた確認メールを承認する</h3>
+      </div>
+      <div class="step-body">
+        <p style="margin-bottom:12px;">「アカウントを追加」を押すと、グループアドレス宛に確認メールが届きます。</p>
+
+        <ul class="checklist">
+          <li><span class="icon">📬</span><span>自分のGmailの受信トレイに「<strong>Gmailのメールアドレスの確認</strong>」という件名のメールが届く</span></li>
+          <li><span class="icon">🔗</span><span>メール内の <strong>「こちらをクリックしてリクエストを確認してください」</strong> リンクをクリックする</span></li>
+          <li><span class="icon">✅</span><span>「確認しました」と表示されれば完了</span></li>
+        </ul>
+
+        <div class="box info">
+          <div class="ttl">確認メールが届かない場合</div>
+          グループメンバー全員に届くメールなので、しばらく待つと届きます。<br>
+          または <code>https://groups.google.com</code> → 対象グループ → 「会話」内を確認してみてください。
+        </div>
+      </div>
+    </div>
+
+    <!-- ━━━━━ 使い方 ━━━━━ -->
+    <hr />
+    <div class="sec-title">設定完了後の使い方</div>
+
+    <div class="step-card">
+      <div class="step-head o">
+        <div class="step-num">✓</div>
+        <h3>差出人を切り替えて送信・返信する</h3>
+      </div>
+      <div class="step-body">
+        <p style="margin-bottom:12px;">メール作成・返信画面の「<strong>差出人（From）</strong>」欄をクリックすると切り替えられます。</p>
+
+        <div class="mock">
+          <div class="mock-bar"><div class="dot r"></div><div class="dot y"></div><div class="dot g"></div></div>
+          <div class="mock-body">
+            <div class="from-box">
+              <div class="from-label">差出人 ▼ をクリックして切り替え</div>
+              <div class="from-opts">
+                <div class="from-opt from-me">ka.maeda28@gmail.com（自分）</div>
+                <div class="from-opt from-grp">叶花-kanoka- &lt;kanoka@hanahiraku-group.com&gt; ✓ 選択中</div>
+              </div>
+            </div>
+            <div style="border-bottom:1px solid #eee; padding:7px 0; font-size:12.5px; color:#bbb;">宛先：</div>
+            <div style="border-bottom:1px solid #eee; padding:7px 0; font-size:12.5px; color:#bbb;">件名：</div>
+            <div style="padding:10px 0; font-size:12.5px; color:#ccc; min-height:44px;">本文を入力...</div>
+          </div>
+        </div>
+
+        <div class="box tip">
+          <div class="ttl">返信時に自動で切り替わるようにする（推奨）</div>
+          Gmailの設定「アカウント」タブ →「返信時のデフォルトの動作」→
+          「<strong>メッセージの送信に使用したアドレスから返信する</strong>」を選ぶと、
+          グループアドレス宛のメールに返信するとき自動で切り替わります。
+        </div>
+      </div>
+    </div>
+
+    <!-- 完了 -->
+    <div class="done">
+      <div class="big">🎉 設定完了！</div>
+      <p>これで <code style="background:rgba(255,255,255,.2); color:#fff; font-size:13px;">kanoka@hanahiraku-group.com</code> として送受信できます。<br>
+      うまくいかない場合は小池まで連絡してください。</p>
+    </div>
+
+  </div><!-- /body -->
+  <footer>はなひらくグループ　Google Workspace 設定ガイド　｜　作成：2026年4月28日</footer>
+</div>
+</body>
+</html>
